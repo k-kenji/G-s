@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>socket.io chat</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <canvas class="whiteboard" ></canvas>
+
+  <div class="colors">
+    <form method="post">
+    <label>色変更<input type="color" name="color" id="test"></label>
+    </form>
+    <form method="post">
+    <label>文字の太さを変更<input id="slide" type="range" name="range" min="1" max="10" value="1"></label>
+    <span id="slide_value">1</span>
+  </div>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+</body>
+</html>

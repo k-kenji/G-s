@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="sweetalert-master/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="sweetalert-master/dist/sweetalert.css">
+</script>
+<title>課題</title>
+<script>
+$(function() {
+  //変数の準備
+  var user_name = "";
+  var user_pass = "";
+  var check_name = "";
+  var check_pass = "";
+  var check_login = "";
+  var user_login = "";
+  //関数外に変数を準備
+  var login_check2 = "";
+  //クリック保存
+  $("#newsub").on("click", function() {
+    user_name = $("#user").val();
+    user_pass = $("#pass").val();
+    //空欄確認
+    if ((user_name == null || user_name == "") || (user_pass == null || user_pass == "")) {
+      // alert("ID、もしくはPASSを入力してください");
+      swal("エラー", "ID、もしくはPASSを入力してください");
+      return;
+    }
+    //オブジェクトに保守
+     user_login = {
+      user: user_name,
+      pass: user_pass
+    }
+    //localStorage保存
+    localStorage.setItem("setdata", JSON.stringify(user_login));
+    // console.log("テスト")
+    swal("登録完了", "", "success");
+  });
+
+  //localStorageでログインデータ取得
+  // var login_check1 = JSON.parse(localStorage.getItem("setdata"));
+  // console.log(login_check1);
+
+  //ログインユーザ確認
+  $("#logsub").on("click", function() {
+    check_name = $("#user").val();
+    check_pass = $("#pass").val();
+    //空欄確認
+    if ((check_name == null || check_name == "") || (check_pass == null || check_pass == "")) {
+      swal("エラー", "ID、もしくはPASSを入力してください");
+      return;
+    }
+    //オブジェクトに保持
+    check_login = {
+      user: check_name,
+      pass: check_pass
+    }
+    //localstorageに保存
+    localStorage.setItem("checkdata", JSON.stringify(check_login));
+    // login_check2 = JSON.parse(localStorage.getItem("checkdata"));
+    // alert(user_name);
+    if (user_name == check_name) {
+      if(user_pass == check_pass) {
+        swal({
+              title: "ログイン完了",
+              text: "自動的に次のページへ移動します",
+              timer: 5000,
+              showConfirmButton: false
+            });
+            setTimeout(function(){
+      window.location.href = 'http://localhost:3000/';
+    }, 3000);
+      } else {
+        swal("未登録です", "登録を完了してください");
+      }
+    } else {
+      swal("未登録です", "登録を完了してください");
+    }
+  });
+
+  // var test = check_login[user: checkname];
+
+});
+
+</script>
+</head>
+<body>
+  <h1>ログイン</h1>
+   <hr>
+   <div align="center">
+      <table border="0">
+        <form action="list.html" method="get">
+          <tr>
+            <th>ユーザID</th>
+            <td>
+                <input type="text" id="user" name="user_id" value="" size="24">
+            </td>
+          </tr>
+          <tr>
+            <th>
+                パスワード
+            </th>
+            <td>
+                <input type="password" id="pass" name="password" value="" size="24">
+            </td>
+           </tr>
+          <tr>
+            <td colspan="1">
+               <input type="button" id="newsub" value="新規登録">
+            </td>
+            <td>
+              <input type="button" id="logsub" name="" value="ログイン">
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+</body>
+</html>
